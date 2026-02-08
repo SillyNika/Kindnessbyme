@@ -1,0 +1,132 @@
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+             /* Added space so button doesn't cover text */
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            color: white;
+        }
+
+        .intro {
+            font-size: 1.35rem;
+            margin-bottom: 3.5rem;
+            opacity: 0.9;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block; 
+            margin: 1rem auto;
+            width: fit-content;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            padding: 1.2rem 2rem;
+            border: 1px solid #fff;
+            border-radius: 16px;
+            display: inline-block;
+            min-width: 280px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background-color: transparent;
+            margin:20px;
+        }
+
+        
+        .card-link:hover h2 {
+            background-color: #fff;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,255,255,0.12);
+        }
+
+
+        .return-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            background-color: black;
+            font-size: 16px;
+            text-decoration: none;
+            border: 1px solid white;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            transition: 0.3s;
+        }
+
+        .return-btn:hover {
+            background-color: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        /*diff button lol*/
+        .truth-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: black;
+            background-color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border: 1px solid white;
+            position: absolute;
+            top:1850px;
+            right: 0px;
+            z-index: 100;
+            transition: 0.3s;
+
+
+        }
+    .truth-btn:hover {
+        background-color: black;
+            color: white;
+            transform: translateY(-2px);
+    }
+
+
+        
+
+        @media (min-width: 900px) {
+            .container { max-width: 760px; }
+            h1 { font-size: 4.2rem; }
+            .intro { font-size: 1.5rem; }
+            h2 { font-size: 2.1rem; min-width: 340px; }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 2.8rem; }
+            .intro { font-size: 1.2rem; }
+            h2 { font-size: 1.6rem; min-width: 90%; padding: 1rem; }
+        }
+
+          img {
+            width: 100%;
+            margin-top: 20%;
+        }
