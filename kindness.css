@@ -75,8 +75,8 @@
             text-decoration: none;
             border: 1px solid white;
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 0px;
+            left: 0px;
             z-index: 100;
             transition: 0.3s;
         }
@@ -97,7 +97,7 @@
             text-decoration: none;
             border: 1px solid white;
             position: absolute;
-            top:1850px;
+            top:2000px;
             right: 0px;
             z-index: 100;
             transition: 0.3s;
