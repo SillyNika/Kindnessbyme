@@ -9,6 +9,9 @@
     
 </head>
 <body>
+<div id="welcome-screen">
+        <h1 class="welcome-text">Are you okay?</h1>
+    </div>
 
     <a href="index.html" class="return-btn">Return</a>
 
@@ -39,6 +42,16 @@
     </div>
 
     <a href="TheTruth.html" class="truth-btn">Truth</a>
+    <script>
+    setTimeout(() => {
+        const welcome = document.getElementById('welcome-screen');
+        if (welcome) {
+            welcome.remove();
+        }
+    }, 6500);
+</script>
 
 </body>
+</html>
+
 </html>
