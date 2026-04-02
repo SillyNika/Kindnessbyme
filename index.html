@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kindess</title>
     <link rel="stylesheet" href="kindness.css" />
-    
-    
 </head>
 <body>
-<div id="welcome-screen">
+    <div id="welcome-screen">
         <h1 class="welcome-text">Are you okay?</h1>
     </div>
 
@@ -33,23 +31,111 @@
         <a href="4whoami.html" class="card-link"><h2>who am i and why am i doing all this</h2></a>        
         <a href="5moreinfo.html" class="card-link"><h2>more information about me (wade)</h2></a>
         <a href="7Peoplewhochangedme.html" class="card-link"><h2>People who helped me</h2></a>
-        <a href="8whatdoesitmean.html" class="card-link"><h2>what does it mean to be a human?</h2></a>
+        <a href="8 whatdoesitmean.html" class="card-link"><h2>what does it mean to be a human?</h2></a>
 
         <h1>
             Please note that i mostly did all this! AI 
             just helped me with some bugs. <br> i barely used it.
         </h1>
+
+        <div id="comment-section">
+            <h3>Leave a Message</h3>
+            <input type="text" id="username" placeholder="Your Name">
+            
+            <textarea id="comment-content" placeholder="Type something kind..." maxlength="1000"></textarea>
+            
+            <p id="word-count" style="color: #888; font-size: 14px; margin-top: -40px; margin-bottom: 20px;">0 / 200 words</p>
+            
+            <button onclick="sendComment()" id="submit-btn">Post Comment</button>
+
+            <div id="display-comments"></div>
+        </div>
+
+        <script>
+            // Improved Live Word Counter Logic using Regex
+            document.getElementById('comment-content').addEventListener('input', function() {
+                const text = this.value;
+                
+                // Matches non-whitespace character groups (real words)
+                const words = text.match(/\S+/g) || [];
+                const count = words.length;
+                
+                const counterDisplay = document.getElementById('word-count');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                counterDisplay.innerText = `${count} / 200 words`;
+
+                if (count > 200) {
+                    counterDisplay.style.color = "red";
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = "0.5";
+                    submitBtn.style.cursor = "not-allowed";
+                } else {
+                    counterDisplay.style.color = "#888";
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = "1";
+                    submitBtn.style.cursor = "pointer";
+                }
+            });
+
+            async function sendComment() {
+                const username = document.getElementById('username').value;
+                const content = document.getElementById('comment-content').value;
+
+                // Smart word count check before sending
+                const words = content.match(/\S+/g) || [];
+                if (words.length > 200) {
+                    alert("Slow down! Your message is over 200 words.");
+                    return; 
+                }
+
+                if (!username.trim() || !content.trim()) {
+                    alert("Please fill in both your name and a message.");
+                    return;
+                }
+
+                const response = await fetch('http://localhost:3000/comments', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, content })
+                });
+
+                if (response.ok) {
+                    alert("Comment saved to Neon!");
+                    document.getElementById('comment-content').value = '';
+                    document.getElementById('username').value = '';
+                    document.getElementById('word-count').innerText = "0 / 200 words";
+                    loadComments(); 
+                }
+            }
+
+            async function loadComments() {
+                const response = await fetch('http://localhost:3000/comments');
+                const comments = await response.json();
+                const display = document.getElementById('display-comments');
+                
+                display.innerHTML = comments.map(c => `
+                    <div style="background:#222; padding:20px; margin-bottom:15px; border-radius:10px; text-align: left; width: 100%; border: 1px solid #333; overflow-wrap: break-word;">
+                        <strong style="color: #fff; font-size: 1.1rem;">${c.username}</strong>
+                        <p style="color: #ccc; margin: 10px 0;">${c.content}</p>
+                        <small style="color: #666;">${new Date(c.created_at).toLocaleString()}</small>
+                    </div>
+                `).join('');
+            }
+
+            loadComments();
+        </script>
     </div>
 
     <a href="TheTruth.html" class="truth-btn">Truth</a>
+    
     <script>
-    setTimeout(() => {
-        const welcome = document.getElementById('welcome-screen');
-        if (welcome) {
-            welcome.remove();
-        }
-    }, 6500);
-</script>
-
+        setTimeout(() => {
+            const welcome = document.getElementById('welcome-screen');
+            if (welcome) {
+                welcome.remove();
+            }
+        }, 6500);
+    </script>
 </body>
 </html>
